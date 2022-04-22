@@ -1,25 +1,124 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Header from "./Components/Header";
+import Quote from "./Components/Quote";
+import Image from "./Components/Image";
+import DeleteButton from "./Components/DeleteButton";
+import LikeButton from "./Components/LikeButton";
+import Name from "./Components/Name";
+import axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const API_URL = "https://thesimpsonsquoteapi.glitch.me/quotes?count=10";
+
+class App extends Component {
+  state = { data: [], input: "" }; // send an empty array called data into state
+
+  // call componentDidMount() and axios to grab the API data
+  componentDidMount() {
+    axios
+      .get(API_URL)
+      .then((response) => {
+        console.log(response);
+        // add the response from the API, into the array in state
+        this.setState({ data: response.data });
+        console.log(this.state.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("the API is down, please try again later");
+      });
+  }
+
+  deleteButton = (position) => {
+    console.log(
+      "delete button was pressed",
+      "the position of this item: ",
+      position
+    );
+    // create a copy of the array
+    const newArray = [...this.state.data]; // spread the total number of quotes into newArray
+    // use splice to remove a quote from the array
+    newArray.splice(position, 1);
+    this.setState({ data: newArray });
+  };
+
+  // send the event into the function, log the result to the console
+  onInput = (event) => {
+    console.log(event.target.value);
+    this.setState({ input: event.target.value });
+  };
+
+  render() {
+    console.log(this.state.data);
+    // copy the data array
+    let filtered = [...this.state.data];
+    if (this.state.input) {
+      filtered = filtered.filter((item) => {
+        if (
+          item.character.toLowerCase().includes(this.state.input.toLowerCase())
+        ) {
+          return true;
+        }
+        return false;
+      });
+    }
+
+    console.log("filtered array", filtered);
+
+    return (
+      <>
+        <Header />
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Search for a character"
+            onInput={this.onInput}
+          ></input>
+        </div>
+        {filtered.map((item, position) => {
+          console.log(item);
+          if (item.characterDirection === "Right") {
+            return (
+              <div className="main" key={position}>
+                <div className="character-container">
+                  <Name character={item.character} />
+                  <div className="image-container">
+                    <Image image={item.image} />
+                    <Quote quote={item.quote} />
+                  </div>
+                  <div className="button-wrapper">
+                    <DeleteButton
+                      deleteButton={this.deleteButton}
+                      position={position}
+                    />
+                    <LikeButton likeButton={this.state.LikeButton} />
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          return (
+            <div className="main">
+              <div className="character-container">
+                <Name character={item.character} />
+                <div className="image-container">
+                  <Quote quote={item.quote} />
+                  <Image image={item.image} />
+                </div>
+
+                <div className="button-wrapper">
+                  <DeleteButton
+                    deleteButton={this.deleteButton}
+                    position={position}
+                  />
+                  <LikeButton likeButton={this.state.LikeButton} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </>
+    );
+  }
 }
 
 export default App;
