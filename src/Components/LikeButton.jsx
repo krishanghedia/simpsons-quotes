@@ -4,11 +4,10 @@ class LikeButton extends Component {
   state = { like: false };
 
   toggleState = (state) => {
-    console.log(this.setState({ like: !this.state.like })); // toggle the state to true or false on click
+    this.setState({ like: !this.state.like }); // toggle the state to true or false on click
   };
 
   render() {
-    console.log(this.state);
     const changeColour = this.state.like ? "#70d1fe" : "#fed90f";
     return (
       <div>

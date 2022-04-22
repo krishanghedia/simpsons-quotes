@@ -50,8 +50,8 @@ h1 {
 }
 
 .quote-text {
-  width: 90%;
-  font-size: 3rem;
+  font-size: 2.5rem;
+  margin: 0;
 }
 
 .character-name {

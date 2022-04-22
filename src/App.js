@@ -17,10 +17,8 @@ class App extends Component {
     axios
       .get(API_URL)
       .then((response) => {
-        console.log(response);
         // add the response from the API, into the array in state
         this.setState({ data: response.data });
-        console.log(this.state.data);
       })
       .catch((error) => {
         console.log(error);
@@ -43,12 +41,10 @@ class App extends Component {
 
   // send the event into the function, log the result to the console
   onInput = (event) => {
-    console.log(event.target.value);
     this.setState({ input: event.target.value });
   };
 
   render() {
-    console.log(this.state.data);
     // copy the data array
     let filtered = [...this.state.data];
     if (this.state.input) {
@@ -61,9 +57,6 @@ class App extends Component {
         return false;
       });
     }
-
-    console.log("filtered array", filtered);
-
     return (
       <>
         <Header />
@@ -75,7 +68,6 @@ class App extends Component {
           ></input>
         </div>
         {filtered.map((item, position) => {
-          console.log(item);
           if (item.characterDirection === "Right") {
             return (
               <div className="main" key={position}>
