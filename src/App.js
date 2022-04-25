@@ -6,6 +6,8 @@ import DeleteButton from "./Components/DeleteButton";
 import LikeButton from "./Components/LikeButton";
 import Name from "./Components/Name";
 import axios from "axios";
+import "./App.css";
+import "./Media-Queries.css";
 
 const API_URL = "https://thesimpsonsquoteapi.glitch.me/quotes?count=10";
 
