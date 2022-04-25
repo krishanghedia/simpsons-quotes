@@ -12,7 +12,8 @@ import "./Media-Queries.css";
 const API_URL = "https://thesimpsonsquoteapi.glitch.me/quotes?count=10";
 
 class App extends Component {
-  state = { data: [], input: "" }; // send an empty array called data into state
+  state = { data: [], input: "" };
+  // send an empty array called data into state
 
   // call componentDidMount() and axios to grab the API data
   componentDidMount() {
@@ -35,7 +36,8 @@ class App extends Component {
       position
     );
     // create a copy of the array
-    const newArray = [...this.state.data]; // spread the total number of quotes into newArray
+    const newArray = [...this.state.data];
+    // spread the total number of quotes into newArray
     // use splice to remove a quote from the array
     newArray.splice(position, 1);
     this.setState({ data: newArray });

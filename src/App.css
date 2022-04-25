@@ -10,6 +10,16 @@ body {
   padding: 2rem;
 }
 
+@font-face {
+  font-family: "Homer Simpson Revised";
+  src: url(./fonts/Homer_Simpson_Revised.woff2);
+}
+
+@font-face {
+  font-family: "Varela Round";
+  src: url(./fonts/VarelaRound-Regular.woff2);
+}
+
 .main {
   background-color: #fff;
   border-radius: 2rem;
