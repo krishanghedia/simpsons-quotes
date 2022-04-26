@@ -30,11 +30,6 @@ class App extends Component {
   }
 
   deleteButton = (position) => {
-    console.log(
-      "delete button was pressed",
-      "the position of this item: ",
-      position
-    );
     // create a copy of the array
     const newArray = [...this.state.data];
     // spread the total number of quotes into newArray
@@ -49,9 +44,7 @@ class App extends Component {
   };
 
   render() {
-    // copy the data array
     let filtered = [...new Set(this.state.data)];
-    console.log(filtered);
     if (this.state.input) {
       filtered = filtered.filter((item) => {
         if (
