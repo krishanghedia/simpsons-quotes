@@ -8,8 +8,7 @@ import Name from "./Components/Name";
 import axios from "axios";
 import "./App.css";
 import "./Media-Queries.css";
-
-const API_URL = "https://thesimpsonsquoteapi.glitch.me/quotes?count=10";
+import { API_KEY } from "./Config";
 
 class App extends Component {
   state = { data: [], input: "" };
@@ -18,7 +17,7 @@ class App extends Component {
   // call componentDidMount() and axios to grab the API data
   componentDidMount() {
     axios
-      .get(API_URL)
+      .get(API_KEY)
       .then((response) => {
         // add the response from the API, into the array in state
         this.setState({ data: response.data });
