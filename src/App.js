@@ -50,7 +50,8 @@ class App extends Component {
 
   render() {
     // copy the data array
-    let filtered = [...this.state.data];
+    let filtered = [...new Set(this.state.data)];
+    console.log(filtered);
     if (this.state.input) {
       filtered = filtered.filter((item) => {
         if (
